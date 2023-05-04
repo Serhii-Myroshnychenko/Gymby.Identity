@@ -41,22 +41,21 @@ namespace Gymby.Identity.Configurations
                     RequirePkce = true,
                     RedirectUris =
                     {
-                        "http://.../signin-oidc"
+                        "http://localhost:3000/signin-oidc"
                     },
                     AllowedCorsOrigins =
                     {
-                        "http:// ..."
+                        "http://localhost:3000"
                     },
                     PostLogoutRedirectUris =
                     {
-                        "http://.../signout-oidc"
+                        "http://localhost:3000/signout-oidc"
                     },
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         "GymbyWebAPI"
-
                     },
                     AllowAccessTokensViaBrowser = true
                 }

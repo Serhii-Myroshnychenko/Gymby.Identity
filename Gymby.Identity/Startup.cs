@@ -1,15 +1,15 @@
 using Gymby.Identity.Configurations;
 using Gymby.Identity.Data;
-using Gymby.Identity.Models;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting; 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System.IO;
 
 namespace Gymby.Identity
@@ -33,7 +33,28 @@ namespace Gymby.Identity
                 options.UseSqlServer(connectionString);
             });
 
-            services.AddIdentity<AppUser, IdentityRole>(config =>
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder
+                            .AllowAnyOrigin()
+                            .SetIsOriginAllowedToAllowWildcardSubdomains()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+
+            services.AddSingleton<ICorsPolicyService>((container) => {
+                var logger = container.GetRequiredService<ILogger<DefaultCorsPolicyService>>();
+                return new DefaultCorsPolicyService(logger)
+                {
+                    AllowAll = true
+                };
+            });
+
+            services.AddIdentity<IdentityUser, IdentityRole>(config =>
             {
                 config.Password.RequiredLength = 4;
                 config.Password.RequireDigit = false;
@@ -52,7 +73,7 @@ namespace Gymby.Identity
             });
 
             services.AddIdentityServer()
-                .AddAspNetIdentity<AppUser>()
+                .AddAspNetIdentity<IdentityUser>()
                 .AddInMemoryApiResources(Configuration.ApiResources)
                 .AddInMemoryIdentityResources(Configuration.IdentityResources)
                 .AddInMemoryApiScopes(Configuration.ApiScopes)
@@ -76,8 +97,10 @@ namespace Gymby.Identity
                 RequestPath = "/styles"
             });
 
+            app.UseCors("AllowAllOrigins");
             app.UseRouting();
             app.UseIdentityServer();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

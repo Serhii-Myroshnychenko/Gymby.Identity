@@ -1,5 +1,4 @@
-﻿using Gymby.Identity.Models;
-using Gymby.Identity.ViewModels;
+﻿using Gymby.Identity.ViewModels;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,14 +8,16 @@ namespace Gymby.Identity.Controlers
 {
     public class AuthController : Controller
     {
-        private readonly SignInManager<AppUser> _signInManager;
-        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IIdentityServerInteractionService _interaction;
-        public AuthController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IIdentityServerInteractionService interaction)
+        public AuthController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IIdentityServerInteractionService interaction, RoleManager<IdentityRole> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _interaction = interaction;
+            _roleManager = roleManager;
         }
 
         [HttpGet]
@@ -36,7 +37,7 @@ namespace Gymby.Identity.Controlers
                 return View(viewModel);
             }
 
-            var user = await _userManager.FindByNameAsync(viewModel.Username);
+            var user = await _userManager.FindByEmailAsync(viewModel.Email);
 
             if(user == null)
             {
@@ -44,7 +45,7 @@ namespace Gymby.Identity.Controlers
                 return View(viewModel);
             }
 
-            var result = await _signInManager.PasswordSignInAsync(viewModel.Username,
+            var result = await _signInManager.PasswordSignInAsync(viewModel.Email,
                 viewModel.Password, false, false);
 
             if (result.Succeeded)
@@ -74,15 +75,24 @@ namespace Gymby.Identity.Controlers
                 return View(viewModel);
             }
 
-            var user = new AppUser
+            // Тут в поле Username записываем Email, основной Username будет хранится на WebAPI
+            var user = new IdentityUser
             {
-                UserName = viewModel.Username,
+                UserName = viewModel.Email,
                 Email = viewModel.Email
             };
             var result = await _userManager.CreateAsync(user, viewModel.Password);
 
             if (result.Succeeded)
             {
+                if (!await _roleManager.RoleExistsAsync("User"))
+                {
+                    var role = new IdentityRole("User");
+                    await _roleManager.CreateAsync(role);
+                }
+
+                await _userManager.AddToRoleAsync(user, "User");
+
                 await _signInManager.SignInAsync(user, false);
                 return Redirect(viewModel.ReturnUrl);
             }

@@ -1,12 +1,11 @@
-﻿using Gymby.Identity.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Gymby.Identity.Data.EntityTypeConfigurations;
 
 namespace Gymby.Identity.Data
 {
-    public class AuthDbContext : IdentityDbContext<AppUser>
+    public class AuthDbContext : IdentityDbContext<IdentityUser>
     {
         public AuthDbContext(DbContextOptions<AuthDbContext> options) 
             : base(options)
@@ -17,7 +16,7 @@ namespace Gymby.Identity.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<AppUser>(entity => entity.ToTable(name: "Users"));
+            builder.Entity<IdentityUser>(entity => entity.ToTable(name: "Users"));
             builder.Entity<IdentityRole>(entity => entity.ToTable(name: "Roles"));
             builder.Entity<IdentityUserRole<string>>(entity => 
                 entity.ToTable(name: "UserRoles"));
@@ -30,7 +29,7 @@ namespace Gymby.Identity.Data
             builder.Entity<IdentityRoleClaim<string>>(entity => 
                 entity.ToTable(name: "RoleClaims"));
 
-            builder.ApplyConfiguration(new AppUserConfiguration());
+            builder.ApplyConfiguration(new IdentityUserConfiguration());
         }
     }
 }
