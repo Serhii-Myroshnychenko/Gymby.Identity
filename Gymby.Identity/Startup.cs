@@ -1,5 +1,8 @@
+using Azure.Storage.Blobs;
 using Gymby.Identity.Configurations;
 using Gymby.Identity.Data;
+using Gymby.Identity.Interfaces;
+using IdentityServer4.Extensions;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting; 
@@ -27,6 +30,7 @@ namespace Gymby.Identity
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = AppConfiguration.GetValue<string>("DbConnection");
+            var azureBlobStorage = AppConfiguration.GetValue<string>("AzureBlobStorage");
 
             services.AddDbContext<AuthDbContext>(options =>
             {
@@ -72,7 +76,9 @@ namespace Gymby.Identity
                 config.LogoutPath = "/Auth/Logout";
             });
 
-            services.AddIdentityServer()
+            services.AddIdentityServer(options =>
+            {
+            })
                 .AddAspNetIdentity<IdentityUser>()
                 .AddInMemoryApiResources(Configuration.ApiResources)
                 .AddInMemoryIdentityResources(Configuration.IdentityResources)
@@ -86,6 +92,7 @@ namespace Gymby.Identity
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -99,7 +106,9 @@ namespace Gymby.Identity
 
             app.UseCors("AllowAllOrigins");
             app.UseRouting();
+
             app.UseIdentityServer();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

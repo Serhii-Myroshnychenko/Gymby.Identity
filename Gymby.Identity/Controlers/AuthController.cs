@@ -1,7 +1,9 @@
-﻿using Gymby.Identity.ViewModels;
+﻿using Gymby.Identity.Interfaces;
+using Gymby.Identity.ViewModels;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 
 namespace Gymby.Identity.Controlers
@@ -12,8 +14,15 @@ namespace Gymby.Identity.Controlers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IIdentityServerInteractionService _interaction;
-        public AuthController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IIdentityServerInteractionService interaction, RoleManager<IdentityRole> roleManager)
+        private readonly IConfiguration _options;
+        public AuthController(
+            IConfiguration options,
+            SignInManager<IdentityUser> signInManager,
+            UserManager<IdentityUser> userManager,
+            IIdentityServerInteractionService interaction,
+            RoleManager<IdentityRole> roleManager)
         {
+            _options = options;
             _signInManager = signInManager;
             _userManager = userManager;
             _interaction = interaction;
@@ -21,14 +30,15 @@ namespace Gymby.Identity.Controlers
         }
 
         [HttpGet]
-        public IActionResult Login(string returnUrl)
+        public IActionResult Login(string ReturnUrl)
         {
             var viewModel = new LoginViewModel
             {
-                ReturnUrl = returnUrl
+                ReturnUrl = ReturnUrl
             };
             return View(viewModel);
         }
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel viewModel)
         {
@@ -90,6 +100,8 @@ namespace Gymby.Identity.Controlers
                     var role = new IdentityRole("User");
                     await _roleManager.CreateAsync(role);
                 }
+
+                var registeredUser = await _userManager.FindByEmailAsync(viewModel.Email);
 
                 await _userManager.AddToRoleAsync(user, "User");
 

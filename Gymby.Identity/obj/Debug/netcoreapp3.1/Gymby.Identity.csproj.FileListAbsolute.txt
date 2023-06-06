@@ -81,3 +81,16 @@ C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\bin\Debug\netcoreapp3
 C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\bin\Debug\netcoreapp3.1\Gymby.Identity.Views.pdb
 C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\obj\Debug\netcoreapp3.1\Gymby.Identity.Views.pdb
 C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\obj\Debug\netcoreapp3.1\Razor\Views\Auth\Register.cshtml.g.cs
+C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\obj\Debug\netcoreapp3.1\Razor\Views\Error.cshtml.g.cs
+C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\bin\Debug\netcoreapp3.1\Azure.Core.dll
+C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\bin\Debug\netcoreapp3.1\Azure.Storage.Blobs.dll
+C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\bin\Debug\netcoreapp3.1\Azure.Storage.Common.dll
+C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\bin\Debug\netcoreapp3.1\System.IO.Hashing.dll
+C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\bin\Debug\netcoreapp3.1\System.Memory.Data.dll
+C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
+C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\obj\Debug\netcoreapp3.1\staticwebassets\Gymby.Identity.StaticWebAssets.Pack.cache
+C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.Gymby.Identity.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.build.Gymby.Identity.props
+C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildMultiTargeting.Gymby.Identity.props
+C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildTransitive.Gymby.Identity.props
