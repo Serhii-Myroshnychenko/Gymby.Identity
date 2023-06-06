@@ -1,23 +1,81 @@
 ﻿@model Gymby.Identity.ViewModels.LoginViewModel
 
 <head>
-    <link href=@Url.Content("~/styles/app.css") rel="stylesheet" type="text/css"/>
+    <link href=@Url.Content("~/styles/app.css") rel="stylesheet" type="text/css" />
 </head>
-<form asp-controller="Auth" asp-action="Login" method="post">
-    <input type="hidden" asp-for="ReturnUrl"/>
-    <div class="header">Login</div>
-    <div class="block">
-        <label>Email</label>
-        <input asp-for="Email" class="input"/>
-        <span asp-validation-for="Email"></span>
-    </div>
-    <div class="block">
-        <label>Password</label>
-        <input asp-for="Password" class="input"/>
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div class="block">
-        <button type="submit">Sign In</button>
-    </div>
+<style>
+    body {
+        background-color: #f1f1f1;
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
 
-</form>
+    .container {
+        width: 400px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+        font-size: 30px;
+        color: #332600;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .input {
+        font-size: 16px;
+        padding: 10px;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    .error-message {
+        color: #ff0000;
+        font-size: 12px;
+        margin-top: -8px;
+        margin-bottom: 10px;
+    }
+
+    .button {
+        font-size: 16px;
+        background-color: #FE5F55;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        padding: 12px 20px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+        .button:hover {
+            background-color: #EA584E;
+        }
+</style>
+<div class="container">
+    <form asp-controller="Auth" asp-action="Login" method="post">
+        <input type="hidden" asp-for="ReturnUrl" />
+        <div class="header">Login</div>
+        <div class="block">
+            <label>Email</label>
+            <input asp-for="Email" class="input" />
+            <span asp-validation-for="Email" class="error-message"></span>
+        </div>
+        <div class="block">
+            <label>Password</label>
+            <input asp-for="Password" class="input" />
+            <span asp-validation-for="Password" class="error-message"></span>
+        </div>
+        <div class="block">
+            <button type="submit" class="button">Sign In</button>
+        </div>
+    </form>
+</div>

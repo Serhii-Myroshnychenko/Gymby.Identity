@@ -100,7 +100,7 @@ namespace Gymby.Identity
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
-                    Path.Combine(env.ContentRootPath,"Styles")),
+                    Path.Combine(env.ContentRootPath,"styles")),
                 RequestPath = "/styles"
             });
 
