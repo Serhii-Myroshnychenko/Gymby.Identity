@@ -1,37 +1,55 @@
-﻿.input {
-    font-size: 16px;
-    font-family: Arial;
-    background-color: #fff;
-    width: 100%;
+﻿body {
+    background-color: #f1f1f1;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header {
-    font-family: Arial;
-    color: #332600;
     font-size: 30px;
+    color: #332600;
     text-align: center;
+    margin-bottom: 20px;
+}
+
+.input {
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.error-message {
+    color: #ff0000;
+    font-size: 12px;
+    margin-top: -8px;
+    margin-bottom: 10px;
 }
 
 .button {
     font-size: 16px;
-    background-color: #a191bd;
+    background-color: #FE5F55;
+    border: none;
     border-radius: 4px;
-    color: #332600;
-    font-family: Arial;
+    color: #fff;
+    padding: 12px 20px;
+    cursor: pointer;
     width: 100%;
 }
 
-.block {
-    margin-top: 10px;
-}
-
-.switch-button {
-    margin-top: 8px;
-    font-size: 8px;
-    border-radius: 4px;
-    color: #332600;
-    font-family: Arial;
-    display: inline-block;
-    text-align: center;
-    width: 100%;
-}
+    .button:hover {
+        background-color: #EA584E;
+    }

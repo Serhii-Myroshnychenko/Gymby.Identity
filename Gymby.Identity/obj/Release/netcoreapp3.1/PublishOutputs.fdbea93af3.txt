@@ -1,4 +1,4 @@
-C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\obj\Release\netcoreapp3.1\PubTmp\Out\Styles\app.css
+C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\obj\Release\netcoreapp3.1\PubTmp\Out\styles\app.css
 C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\obj\Release\netcoreapp3.1\PubTmp\Out\Gymby.Identity.exe
 C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.Development.json
 C:\Users\Xiaomi\source\repos\Gymby.Identity\Gymby.Identity\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.json
