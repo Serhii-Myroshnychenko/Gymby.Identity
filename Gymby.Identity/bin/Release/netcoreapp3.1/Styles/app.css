@@ -1,4 +1,17 @@
-﻿body {
+﻿.error-validation {
+    float: right;
+    font-size: 9px;
+    color: red;
+    margin-bottom: 5px;
+}
+
+.register-link {
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+
+body {
     background-color: #f1f1f1;
     font-family: Arial, sans-serif;
     display: flex;
@@ -50,6 +63,6 @@
     width: 100%;
 }
 
-    .button:hover {
-        background-color: #EA584E;
-    }
+.button:hover {
+    background-color: #EA584E;
+}

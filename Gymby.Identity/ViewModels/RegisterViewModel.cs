@@ -12,6 +12,7 @@ namespace Gymby.Identity.ViewModels
         public string Password { get; set; }
         [Required]
         [Compare("Password")]
+        [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
         public string ReturnUrl { get; set; }
     }

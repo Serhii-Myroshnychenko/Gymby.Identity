@@ -63,7 +63,8 @@ namespace Gymby.Identity.Controlers
                 return Redirect(viewModel.ReturnUrl);
             }
 
-            ModelState.AddModelError(string.Empty, "Login error");
+            ViewBag.AlertMessage = "Invalid data. Please try again.";
+
             return View(viewModel);
         }
 
@@ -80,12 +81,12 @@ namespace Gymby.Identity.Controlers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel viewModel)
         {
+
             if (!ModelState.IsValid)
             {
                 return View(viewModel);
             }
 
-            // Тут в поле Username записываем Email, основной Username будет хранится на WebAPI
             var user = new IdentityUser
             {
                 UserName = viewModel.Email,
@@ -101,15 +102,15 @@ namespace Gymby.Identity.Controlers
                     await _roleManager.CreateAsync(role);
                 }
 
-                var registeredUser = await _userManager.FindByEmailAsync(viewModel.Email);
-
                 await _userManager.AddToRoleAsync(user, "User");
 
                 await _signInManager.SignInAsync(user, false);
+
                 return Redirect(viewModel.ReturnUrl);
             }
 
-            ModelState.AddModelError(string.Empty, "Error occurred");
+            ViewBag.AlertMessage = "Invalid data. Please try again.";
+
             return View(viewModel);
         }
         [HttpGet]

@@ -1,29 +1,41 @@
 ﻿@model Gymby.Identity.ViewModels.RegisterViewModel
 
 <head>
-    <link href=@Url.Content("~/styles/app.css") rel="stylesheet" type="text/css"/>
+    <link href=@Url.Content("~/styles/app.css") rel="stylesheet" type="text/css" />
 </head>
-<form asp-controller="Auth" asp-action="Register" method="post">
-    <input type="hidden" asp-for="ReturnUrl" />
-    <div class="header">Sign Up</div>
-    <div class="block">
-        <label>Email</label>
-        <input asp-for="Email" class="input" />
-        <span asp-validation-for="Email"></span>
-    </div>
-    <div class="block">
-        <label>Password</label>
-        <input asp-for="Password" class="input" />
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div class="block">
-        <label>Confirm password</label>
-        <input asp-for="ConfirmPassword" class="input" />
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div class="block">
-        <button type="submit" class="button">Sign up</button>
-    </div>
-    <a asp-controller="Auth" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl"
-       class="switch-button">Login</a>
-</form>
+
+<div class="container">
+    <form asp-controller="Auth" asp-action="Register" method="post">
+        <input type="hidden" asp-for="ReturnUrl" />
+        <div class="header">Sign Up</div>
+        <div class="block">
+            <label>Email</label>
+            <input asp-for="Email" class="input" />
+            <span asp-validation-for="Email" class="error-validation"></span>
+        </div>
+        <div class="block">
+            <label>Password</label>
+            <input asp-for="Password" class="input" />
+            <span asp-validation-for="Password" class="error-validation"></span>
+        </div>
+        <div class="block">
+            <label>Confirm password</label>
+            <input asp-for="ConfirmPassword" class="input" />
+            <span asp-validation-for="ConfirmPassword" class="error-validation"></span>
+        </div>
+        <div class="block">
+            <button type="submit" class="button">Sign up</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    @if (!string.IsNullOrEmpty(ViewBag.AlertMessage))
+    {
+        <text>
+                window.onload = function() {
+                    alert('@ViewBag.AlertMessage');
+                }
+        </text>
+    }
+</script>
